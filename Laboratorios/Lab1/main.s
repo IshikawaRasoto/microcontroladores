@@ -15,16 +15,6 @@
 ; ========================
 ; Defini��es de Valores
 
-
-; Definicao de registradores e suas funcionalidades estaticas
-
-; R8	- Valor do display unitario
-; R9	- Valor do display dezenas
-; R10	- Valor da temperatura atual
-; R11	- Valor da temperatura alvo
-; R12	- Contador das inetracoes para atraso de 1s na atualizacao da temperatura
-
-
 ; -------------------------------------------------------------------------------
 ; �rea de Dados - Declara��es de vari�veis
 		AREA  DATA, ALIGN=2
@@ -52,12 +42,28 @@
 		IMPORT  SysTick_Wait1ms			
 		IMPORT  GPIO_Init
         IMPORT  PortN_Output
-        IMPORT  PortJ_Input	
 		IMPORT 	Configura_Interrupts
+
+		import Escreve_Display_Decimo
+		import Escreve_Display_Unitario
+		import Escreve_LEDs
+		import Acende_LED_N0
+		import Apaga_LED_N0
+		import Acende_LED_N1
+		import Apaga_LED_N1
 
 
 ; -------------------------------------------------------------------------------
 ; Fun��o main()
+
+; Definicao de registradores e suas funcionalidades estaticas
+
+; R8	- Valor do display unitario
+; R9	- Valor do display dezenas
+; R10	- Valor da temperatura atual
+; R11	- Valor da temperatura alvo
+; R12	- Contador das inetracoes para atraso de 1s na atualizacao da temperatura
+
 Start  		
 	BL PLL_Init                  ;Chama a subrotina para alterar o clock do microcontrolador para 80MHz
 	BL SysTick_Init              ;Chama a subrotina para inicializar o SysTick
@@ -66,12 +72,7 @@ Start
 
 	mov r10, #15
 	mov r11, #25
-	mov r12, #333
-
-	bl Escreve_Display_Decimo
-	bl Escreve_Display_Unitario
-	bl Escreve_LEDs
-
+	mov r12, #166
 	
 
 MainLoop
@@ -80,12 +81,43 @@ MainLoop
 ; Se estivar ativada chama a subrotina Pisca_LED
 ; ****************************************
 
-	bl 
+	mov r12, #166
 
+Loop_1s
 	bl Escreve_Display_Decimo
 	bl Escreve_Display_Unitario
 	bl Escreve_LEDs
+	
+	sub r12, r12, #1
+	cmp r12, #0
+	bne Loop_1s ; Verifica se ja passou 1s
+	
+	; Atualiza temperatura
+	cmp r10, r11
+	beq Temp_igual
+	bgt Temp_maior
+	blt Temp_menor
 
 
 	B MainLoop
 
+Temp_maior
+	sub r10, r10, #1
+	bl Acende_LED_N1
+	bl Apaga_LED_N0
+	B MainLoop
+
+Temp_igual
+	bl Acende_LED_N0
+	bl Acende_LED_N1
+	B MainLoop
+	
+
+Temp_menor
+	add r10, r10, #1
+	bl Acende_LED_N0
+	bl Apaga_LED_N1
+	B MainLoop
+	
+	ALIGN
+	END

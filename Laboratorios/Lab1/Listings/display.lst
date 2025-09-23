@@ -1,0 +1,874 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; display.s
+    2 00000000         ; Desenvolvido para a placa EK-TM4C1294XL
+    3 00000000         ; Codigo que controla os leds da placa de apoio:
+    4 00000000         
+    5 00000000         ; ------------------------------------------------------
+                       -------------------------
+    6 00000000                 THUMB                        ; Instrucoes do tip
+                                                            o Thumb-2
+    7 00000000         ; ------------------------------------------------------
+                       -------------------------
+    8 00000000         
+    9 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+   10 00000000         
+   11 00000000         ; Display 1 - Dezenas
+   12 00000000         ; Display 2 - Unidades
+   13 00000000         
+   14 00000000                 export           Escreve_Display_Decimo
+   15 00000000                 export           Escreve_Display_Unitario
+   16 00000000         
+   17 00000000                 export           Display1_Liga
+   18 00000000                 export           Display1_Desliga
+   19 00000000                 export           Display2_Liga
+   20 00000000                 export           Display2_Desliga
+   21 00000000                 export           Printa_0
+   22 00000000                 export           Printa_1
+   23 00000000                 export           Printa_2
+   24 00000000                 export           Printa_3
+   25 00000000                 export           Printa_4
+   26 00000000                 export           Printa_5
+   27 00000000                 export           Printa_6
+   28 00000000                 export           Printa_7
+   29 00000000                 export           Printa_8
+   30 00000000                 export           Printa_9
+   31 00000000                 export           Printa_A
+   32 00000000                 export           Printa_B
+   33 00000000                 export           Printa_C
+   34 00000000                 export           Printa_D
+   35 00000000                 export           Printa_E
+   36 00000000                 export           Printa_F
+   37 00000000         
+   38 00000000                 import           SysTick_Wait1ms
+   39 00000000         
+   40 00000000                 import           PortA_Output
+   41 00000000                 import           PortB_Output
+   42 00000000                 import           PortN_Output ; Permite chamar P
+                                                            ortN_Output de outr
+                                                            o arquivo
+   43 00000000                 import           PortP_Output
+   44 00000000                 import           PortQ_Output
+   45 00000000         
+   46 00000000         
+   47 00000000         
+   48 00000000         seg7_hex_tbl
+   49 00000000 3F              DCB              2_00111111  ; 0
+   50 00000001 06              DCB              2_00000110  ; 1
+   51 00000002 5B              DCB              2_01011011  ; 2
+   52 00000003 4F              DCB              2_01001111  ; 3
+   53 00000004 66              DCB              2_01100110  ; 4
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   54 00000005 6D              DCB              2_01101101  ; 5
+   55 00000006 7D              DCB              2_01111101  ; 6
+   56 00000007 07              DCB              2_00000111  ; 7
+   57 00000008 7F              DCB              2_01111111  ; 8
+   58 00000009 6F              DCB              2_01101111  ; 9
+   59 0000000A 77              DCB              2_01110111  ; A
+   60 0000000B 7C              DCB              2_01111100  ; b
+   61 0000000C 39              DCB              2_00111001  ; C
+   62 0000000D 5E              DCB              2_01011110  ; d
+   63 0000000E 79              DCB              2_01111001  ; E
+   64 0000000F 71              DCB              2_01110001  ; F
+   65 00000010         
+   66 00000010         ; Inputs para as proximas funcoes
+   67 00000010         
+   68 00000010         ; R10 - Valor a ser mostrado
+   69 00000010         
+   70 00000010         ; Rotinas para controle do display de 7 segmentos
+   71 00000010         
+   72 00000010         ; R8 - Valor do display unitario
+   73 00000010         ; R9 - Valor do display dezenas
+   74 00000010         
+   75 00000010         Escreve_Display_Decimo
+   76 00000010 B50F            push             {r0, r1, r2, r3, lr}
+   77 00000012         
+   78 00000012         ; atualiza o valor de r9 baseado em r10
+   79 00000012 F04F 000A       mov              r0, #10
+   80 00000016 FBBA F9F0       udiv             r9, r10, r0 ; r9 = r10 / 10
+   81 0000001A         
+   82 0000001A F009 090F       and              r9, r9, #0xF ; garante índice 0
+                                                            ..F
+   83 0000001E F2AF 0320       adr              r3, seg7_hex_tbl
+   84 00000022 F813 0009       ldrb             r0, [r3, r9] ; r4 = padrão de 7
+                                                             segmentos
+   85 00000026         
+   86 00000026 F000 020F       and              r2, r0, #2_00001111
+   87 0000002A F7FF FFFE       bl               PortQ_Output
+   88 0000002E         
+   89 0000002E F000 02F0       and              r2, r0, #2_11110000
+   90 00000032 F7FF FFFE       bl               PortA_Output
+   91 00000036         
+   92 00000036 F7FF FFFE       bl               Display1_Liga
+   93 0000003A F04F 0001       mov              r0, #1
+   94 0000003E F7FF FFFE       bl               SysTick_Wait1ms
+   95 00000042 F7FF FFFE       bl               Display1_Desliga
+   96 00000046 F04F 0001       mov              r0, #1
+   97 0000004A F7FF FFFE       bl               SysTick_Wait1ms
+   98 0000004E         
+   99 0000004E E8BD 400F       pop              {r0, r1, r2, r3, lr}
+  100 00000052 4770            bx               lr
+  101 00000054         
+  102 00000054         
+  103 00000054         Escreve_Display_Unitario
+  104 00000054 B507            push             {r0, r1, r2, lr}
+  105 00000056         
+  106 00000056         ; atualiza o valor de r8 baseado em r10
+  107 00000056         
+  108 00000056 F04F 000A       mov              r0, #10     ; r0 = 10 (apoio)
+  109 0000005A FBBA F8F0       udiv             r8, r10, r0 ; r8 = r10 / 10
+  110 0000005E FB08 A810       mls              r8, r8, r0, r10 ; r8 = r10 - (r
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                                                            8 * 10)  => resto (
+                                                            r10 % 10)
+  111 00000062         
+  112 00000062         ; Escreve o valor do display unitario
+  113 00000062 F008 080F       and              r8, r8, #0xF ; garante índice 0
+                                                            ..F
+  114 00000066 F2AF 0368       adr              r3, seg7_hex_tbl
+  115 0000006A F813 0008       ldrb             r0, [r3, r8] ; r4 = padrão de 7
+                                                             segmentos
+  116 0000006E         
+  117 0000006E F000 020F       and              r2, r0, #2_00001111
+  118 00000072 F7FF FFFE       bl               PortQ_Output
+  119 00000076         
+  120 00000076 F000 02F0       and              r2, r0, #2_11110000
+  121 0000007A F7FF FFFE       bl               PortA_Output
+  122 0000007E         
+  123 0000007E F7FF FFFE       bl               Display2_Liga
+  124 00000082 F04F 0001       mov              r0, #1
+  125 00000086 F7FF FFFE       bl               SysTick_Wait1ms
+  126 0000008A F7FF FFFE       bl               Display2_Desliga
+  127 0000008E F04F 0001       mov              r0, #1
+  128 00000092 F7FF FFFE       bl               SysTick_Wait1ms
+  129 00000096         
+  130 00000096 E8BD 4007       pop              {r0, r1, r2, lr}
+  131 0000009A 4770            bx               lr
+  132 0000009C         
+  133 0000009C         
+  134 0000009C         Display1_Liga
+  135 0000009C B507            push             {r0, r1, r2, lr}
+  136 0000009E         
+  137 0000009E         ; Ativa pino PB4
+  138 0000009E F04F 0210       mov              r2, #2_10000
+  139 000000A2 F7FF FFFE       bl               PortB_Output
+  140 000000A6         
+  141 000000A6 E8BD 4007       pop              {r0, r1, r2, lr}
+  142 000000AA 4770            bx               lr
+  143 000000AC         
+  144 000000AC         Display1_Desliga
+  145 000000AC B507            push             {r0, r1, r2, lr}
+  146 000000AE         
+  147 000000AE         ; Desativa pino PB4
+  148 000000AE F04F 0200       mov              r2, #0x0
+  149 000000B2 F7FF FFFE       bl               PortB_Output
+  150 000000B6         
+  151 000000B6 E8BD 4007       pop              {r0, r1, r2, lr}
+  152 000000BA 4770            bx               lr
+  153 000000BC         
+  154 000000BC         Display2_Liga
+  155 000000BC B507            push             {r0, r1, r2, lr}
+  156 000000BE         
+  157 000000BE         ; Ativa pino PB5
+  158 000000BE F04F 0220       mov              r2, #2_100000
+  159 000000C2 F7FF FFFE       bl               PortB_Output
+  160 000000C6         
+  161 000000C6 E8BD 4007       pop              {r0, r1, r2, lr}
+  162 000000CA 4770            bx               lr
+  163 000000CC         
+  164 000000CC         Display2_Desliga
+  165 000000CC B507            push             {r0, r1, r2, lr}
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+  166 000000CE         
+  167 000000CE         ; Desativa pino PB5
+  168 000000CE F04F 0200       mov              r2, #0x0
+  169 000000D2 F7FF FFFE       bl               PortB_Output
+  170 000000D6         
+  171 000000D6 E8BD 4007       pop              {r0, r1, r2, lr}
+  172 000000DA 4770            bx               lr
+  173 000000DC         
+  174 000000DC         ; Controle dos segmentos dos displays
+  175 000000DC         ; a - PQ0
+  176 000000DC         ; b - PQ1
+  177 000000DC         ; c - PQ2
+  178 000000DC         ; d - PQ3
+  179 000000DC         ; e - PA4
+  180 000000DC         ; f - PA5
+  181 000000DC         ; g - PA6
+  182 000000DC         ; dp - PA7
+  183 000000DC         
+  184 000000DC         Printa_0
+  185 000000DC         ; Registrado para enviar os valores para o display: r2
+  186 000000DC B507            push             {r0, r1, r2, lr}
+  187 000000DE         
+  188 000000DE         ; Ativa os segmentos para o 0
+  189 000000DE         ; a, b, c, d, e, f -> true
+  190 000000DE         
+  191 000000DE         ; Ativando a, b, c, d
+  192 000000DE F04F 020F       mov              r2, #2_1111
+  193 000000E2 F7FF FFFE       bl               PortQ_Output
+  194 000000E6         
+  195 000000E6         ; Ativando e, f
+  196 000000E6 F04F 0230       mov              r2, #2_00110000
+  197 000000EA F7FF FFFE       bl               PortA_Output
+  198 000000EE         
+  199 000000EE E8BD 4007       pop              {r0, r1, r2, lr}
+  200 000000F2 4770            bx               lr
+  201 000000F4         
+  202 000000F4         Printa_1
+  203 000000F4         ; Registrado para enviar os valores para o display: r2
+  204 000000F4 B507            push             {r0, r1, r2, lr}
+  205 000000F6         
+  206 000000F6         ; Ativa os segmentos para o 1
+  207 000000F6         ; b, c -> true
+  208 000000F6         ; a, d -> false
+  209 000000F6 F04F 0206       mov              r2, #2_0110
+  210 000000FA F7FF FFFE       bl               PortQ_Output
+  211 000000FE         
+  212 000000FE         ; e, f, g, dp -> false
+  213 000000FE F04F 0200       mov              r2, #2_00000000
+  214 00000102 F7FF FFFE       bl               PortA_Output
+  215 00000106         
+  216 00000106 E8BD 4007       pop              {r0, r1, r2, lr}
+  217 0000010A 4770            bx               lr
+  218 0000010C         
+  219 0000010C         Printa_2
+  220 0000010C         ; Registrado para enviar os valores para o display: r2
+  221 0000010C         
+  222 0000010C B507            push             {r0, r1, r2, lr}
+  223 0000010E         
+  224 0000010E         ; Ativa os segmentos para o 2
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+  225 0000010E         ; a, b, d -> true
+  226 0000010E         ; c -> false
+  227 0000010E F04F 020B       mov              r2, #2_1011
+  228 00000112 F7FF FFFE       bl               PortQ_Output
+  229 00000116         
+  230 00000116         ; e, g -> true
+  231 00000116         ; f, dp -> false
+  232 00000116 F04F 0250       mov              r2, #2_01010000
+  233 0000011A F7FF FFFE       bl               PortA_Output
+  234 0000011E         
+  235 0000011E E8BD 4007       pop              {r0, r1, r2, lr}
+  236 00000122 4770            bx               lr
+  237 00000124         
+  238 00000124         Printa_3
+  239 00000124         ; Registrado para enviar os valores para o display: r2
+  240 00000124         
+  241 00000124 B507            push             {r0, r1, r2, lr}
+  242 00000126         
+  243 00000126         ; Ativa os segmentos para o 3
+  244 00000126         ; a, b, c, d -> true
+  245 00000126 F04F 020F       mov              r2, #2_1111
+  246 0000012A F7FF FFFE       bl               PortQ_Output
+  247 0000012E         
+  248 0000012E         ; g -> true
+  249 0000012E         ; e, f, dp -> false
+  250 0000012E F04F 0240       mov              r2, #2_01000000
+  251 00000132 F7FF FFFE       bl               PortA_Output
+  252 00000136         
+  253 00000136 E8BD 4007       pop              {r0, r1, r2, lr}
+  254 0000013A 4770            bx               lr
+  255 0000013C         
+  256 0000013C         Printa_4
+  257 0000013C         ; Registrado para enviar os valores para o display: r2
+  258 0000013C         
+  259 0000013C B507            push             {r0, r1, r2, lr}
+  260 0000013E         
+  261 0000013E         ; Ativa os segmentos para o 4
+  262 0000013E         ; b, c -> true
+  263 0000013E F04F 0206       mov              r2, #2_0110
+  264 00000142 F7FF FFFE       bl               PortQ_Output
+  265 00000146         
+  266 00000146         ; f, g -> true
+  267 00000146         ; a, d, e, dp -> false
+  268 00000146 F04F 0260       mov              r2, #2_01100000
+  269 0000014A F7FF FFFE       bl               PortA_Output
+  270 0000014E         
+  271 0000014E E8BD 4007       pop              {r0, r1, r2, lr}
+  272 00000152 4770            bx               lr
+  273 00000154         
+  274 00000154         Printa_5
+  275 00000154         ; Registrado para enviar os valores para o display: r2
+  276 00000154         
+  277 00000154 B507            push             {r0, r1, r2, lr}
+  278 00000156         
+  279 00000156         ; Ativa os segmentos para o 5
+  280 00000156         ; a, c, d -> true
+  281 00000156 F04F 020D       mov              r2, #2_1101
+  282 0000015A F7FF FFFE       bl               PortQ_Output
+  283 0000015E         
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+  284 0000015E         ; e, f, g, dp -> false
+  285 0000015E F04F 0200       mov              r2, #2_00000000
+  286 00000162 F7FF FFFE       bl               PortA_Output
+  287 00000166         
+  288 00000166 E8BD 4007       pop              {r0, r1, r2, lr}
+  289 0000016A 4770            bx               lr
+  290 0000016C         
+  291 0000016C         Printa_6
+  292 0000016C         ; Registrado para enviar os valores para o display: r2
+  293 0000016C         
+  294 0000016C B507            push             {r0, r1, r2, lr}
+  295 0000016E         
+  296 0000016E         ; Ativa os segmentos para o 6
+  297 0000016E         ; a, c, d -> true
+  298 0000016E F04F 020D       mov              r2, #2_1101
+  299 00000172 F7FF FFFE       bl               PortQ_Output
+  300 00000176         
+  301 00000176         ; e, f, g -> true
+  302 00000176         ; dp -> false
+  303 00000176 F04F 0270       mov              r2, #2_01110000
+  304 0000017A F7FF FFFE       bl               PortA_Output
+  305 0000017E         
+  306 0000017E E8BD 4007       pop              {r0, r1, r2, lr}
+  307 00000182 4770            bx               lr
+  308 00000184         
+  309 00000184         Printa_7
+  310 00000184         ; Registrado para enviar os valores para o display: r2
+  311 00000184         
+  312 00000184 B507            push             {r0, r1, r2, lr}
+  313 00000186         
+  314 00000186         ; Ativa os segmentos para o 7
+  315 00000186         ; a, b, c -> true
+  316 00000186 F04F 0207       mov              r2, #2_0111
+  317 0000018A F7FF FFFE       bl               PortQ_Output
+  318 0000018E         
+  319 0000018E         ; e, f, g, dp -> false
+  320 0000018E F04F 0200       mov              r2, #2_00000000
+  321 00000192 F7FF FFFE       bl               PortA_Output
+  322 00000196         
+  323 00000196 E8BD 4007       pop              {r0, r1, r2, lr}
+  324 0000019A 4770            bx               lr
+  325 0000019C         
+  326 0000019C         Printa_8
+  327 0000019C         ; Registrado para enviar os valores para o display: r2
+  328 0000019C         
+  329 0000019C B507            push             {r0, r1, r2, lr}
+  330 0000019E         
+  331 0000019E         ; Ativa os segmentos para o 8
+  332 0000019E         ; a, b, c, d -> true
+  333 0000019E F04F 020F       mov              r2, #2_1111
+  334 000001A2 F7FF FFFE       bl               PortQ_Output
+  335 000001A6         
+  336 000001A6         ; e, f, g -> true
+  337 000001A6         ; dp -> false
+  338 000001A6 F04F 0270       mov              r2, #2_01110000
+  339 000001AA F7FF FFFE       bl               PortA_Output
+  340 000001AE         
+  341 000001AE E8BD 4007       pop              {r0, r1, r2, lr}
+  342 000001B2 4770            bx               lr
+
+
+
+ARM Macro Assembler    Page 7 
+
+
+  343 000001B4         
+  344 000001B4         Printa_9
+  345 000001B4         ; Registrado para enviar os valores para o display: r2
+  346 000001B4         
+  347 000001B4 B507            push             {r0, r1, r2, lr}
+  348 000001B6         
+  349 000001B6         ; Ativa os segmentos para o 9
+  350 000001B6         ; a, b, c, d -> true
+  351 000001B6 F04F 020F       mov              r2, #2_1111
+  352 000001BA F7FF FFFE       bl               PortQ_Output
+  353 000001BE         
+  354 000001BE         ; f, g -> true
+  355 000001BE         ; e, dp -> false
+  356 000001BE F04F 0260       mov              r2, #2_01100000
+  357 000001C2 F7FF FFFE       bl               PortA_Output
+  358 000001C6         
+  359 000001C6 E8BD 4007       pop              {r0, r1, r2, lr}
+  360 000001CA 4770            bx               lr
+  361 000001CC         
+  362 000001CC         Printa_A
+  363 000001CC         ; Registrado para enviar os valores para o display: r2
+  364 000001CC         
+  365 000001CC B507            push             {r0, r1, r2, lr}
+  366 000001CE         
+  367 000001CE         ; Ativa os segmentos para o A
+  368 000001CE         ; a, b, c -> true
+  369 000001CE F04F 0207       mov              r2, #2_0111
+  370 000001D2 F7FF FFFE       bl               PortQ_Output
+  371 000001D6         
+  372 000001D6         ; e, f, g -> true
+  373 000001D6         ; dp -> false
+  374 000001D6 F04F 0270       mov              r2, #2_01110000
+  375 000001DA F7FF FFFE       bl               PortA_Output
+  376 000001DE         
+  377 000001DE E8BD 4007       pop              {r0, r1, r2, lr}
+  378 000001E2 4770            bx               lr
+  379 000001E4         
+  380 000001E4         Printa_B
+  381 000001E4         ; Registrado para enviar os valores para o display: r2
+  382 000001E4         
+  383 000001E4 B507            push             {r0, r1, r2, lr}
+  384 000001E6         
+  385 000001E6         ; Ativa os segmentos para o B
+  386 000001E6         ; c, d -> true
+  387 000001E6 F04F 020C       mov              r2, #2_1100
+  388 000001EA F7FF FFFE       bl               PortQ_Output
+  389 000001EE         
+  390 000001EE         ; e, f, g -> true
+  391 000001EE         ; a, dp -> false
+  392 000001EE F04F 0270       mov              r2, #2_01110000
+  393 000001F2 F7FF FFFE       bl               PortA_Output
+  394 000001F6         
+  395 000001F6 E8BD 4007       pop              {r0, r1, r2, lr}
+  396 000001FA 4770            bx               lr
+  397 000001FC         
+  398 000001FC         Printa_C
+  399 000001FC         ; Registrado para enviar os valores para o display: r2
+  400 000001FC         
+  401 000001FC B507            push             {r0, r1, r2, lr}
+
+
+
+ARM Macro Assembler    Page 8 
+
+
+  402 000001FE         
+  403 000001FE         ; Ativa os segmentos para o C
+  404 000001FE         ; a, d -> true
+  405 000001FE F04F 0209       mov              r2, #2_1001
+  406 00000202 F7FF FFFE       bl               PortQ_Output
+  407 00000206         
+  408 00000206         ; e, f -> true
+  409 00000206         ; b, c, g, dp -> false
+  410 00000206 F04F 0230       mov              r2, #2_00110000
+  411 0000020A F7FF FFFE       bl               PortA_Output
+  412 0000020E         
+  413 0000020E E8BD 4007       pop              {r0, r1, r2, lr}
+  414 00000212 4770            bx               lr
+  415 00000214         
+  416 00000214         Printa_D
+  417 00000214         ; Registrado para enviar os valores para o display: r2
+  418 00000214         
+  419 00000214 B507            push             {r0, r1, r2, lr}
+  420 00000216         
+  421 00000216         ; Ativa os segmentos para o D
+  422 00000216         ; b, c, d -> true
+  423 00000216 F04F 020E       mov              r2, #2_1110
+  424 0000021A F7FF FFFE       bl               PortQ_Output
+  425 0000021E         
+  426 0000021E         ; e, g -> true
+  427 0000021E         ; f, dp -> false
+  428 0000021E F04F 0250       mov              r2, #2_01010000
+  429 00000222 F7FF FFFE       bl               PortA_Output
+  430 00000226         
+  431 00000226 E8BD 4007       pop              {r0, r1, r2, lr}
+  432 0000022A 4770            bx               lr
+  433 0000022C         
+  434 0000022C         Printa_E
+  435 0000022C         ; Registrado para enviar os valores para o display: r2
+  436 0000022C         
+  437 0000022C B507            push             {r0, r1, r2, lr}
+  438 0000022E         
+  439 0000022E         ; Ativa os segmentos para o E
+  440 0000022E         ; a, d -> true
+  441 0000022E F04F 0209       mov              r2, #2_1001
+  442 00000232 F7FF FFFE       bl               PortQ_Output
+  443 00000236         
+  444 00000236         ; e, f, g -> true
+  445 00000236         ; dp -> false
+  446 00000236 F04F 0270       mov              r2, #2_01110000
+  447 0000023A F7FF FFFE       bl               PortA_Output
+  448 0000023E         
+  449 0000023E E8BD 4007       pop              {r0, r1, r2, lr}
+  450 00000242 4770            bx               lr
+  451 00000244         
+  452 00000244         Printa_F
+  453 00000244         ; Registrado para enviar os valores para o display: r2
+  454 00000244         
+  455 00000244 B507            push             {r0, r1, r2, lr}
+  456 00000246         
+  457 00000246         ; Ativa os segmentos para o F
+  458 00000246         ; a -> true
+  459 00000246 F04F 0201       mov              r2, #2_0001
+  460 0000024A F7FF FFFE       bl               PortQ_Output
+
+
+
+ARM Macro Assembler    Page 9 
+
+
+  461 0000024E         
+  462 0000024E         ; e, f, g -> true
+  463 0000024E         ; dp -> false
+  464 0000024E F04F 0270       mov              r2, #2_01110000
+  465 00000252 F7FF FFFE       bl               PortA_Output
+  466 00000256         
+  467 00000256 E8BD 4007       pop              {r0, r1, r2, lr}
+  468 0000025A 4770            bx               lr
+  469 0000025C         
+  470 0000025C         END
+                       
+Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M4.fp.sp 
+--depend=.\objects\display.d -o.\objects\display.o -IC:\Users\rafae\AppData\Loc
+al\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129 --predefine="__EVAL SET
+A 1" --predefine="__UVISION_VERSION SETA 543" --predefine="TM4C1294NCPDT SETA 1
+" --list=.\listings\display.lst display.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 9 in file display.s
+   Uses
+      None
+Comment: .text unused
+Display1_Desliga 000000AC
+
+Symbol: Display1_Desliga
+   Definitions
+      At line 144 in file display.s
+   Uses
+      At line 18 in file display.s
+      At line 95 in file display.s
+
+Display1_Liga 0000009C
+
+Symbol: Display1_Liga
+   Definitions
+      At line 134 in file display.s
+   Uses
+      At line 17 in file display.s
+      At line 92 in file display.s
+
+Display2_Desliga 000000CC
+
+Symbol: Display2_Desliga
+   Definitions
+      At line 164 in file display.s
+   Uses
+      At line 20 in file display.s
+      At line 126 in file display.s
+
+Display2_Liga 000000BC
+
+Symbol: Display2_Liga
+   Definitions
+      At line 154 in file display.s
+   Uses
+      At line 19 in file display.s
+      At line 123 in file display.s
+
+END 0000025C
+
+Symbol: END
+   Definitions
+      At line 470 in file display.s
+   Uses
+      None
+Comment: END unused
+Escreve_Display_Decimo 00000010
+
+Symbol: Escreve_Display_Decimo
+   Definitions
+      At line 75 in file display.s
+   Uses
+      At line 14 in file display.s
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+Comment: Escreve_Display_Decimo used once
+Escreve_Display_Unitario 00000054
+
+Symbol: Escreve_Display_Unitario
+   Definitions
+      At line 103 in file display.s
+   Uses
+      At line 15 in file display.s
+Comment: Escreve_Display_Unitario used once
+Printa_0 000000DC
+
+Symbol: Printa_0
+   Definitions
+      At line 184 in file display.s
+   Uses
+      At line 21 in file display.s
+Comment: Printa_0 used once
+Printa_1 000000F4
+
+Symbol: Printa_1
+   Definitions
+      At line 202 in file display.s
+   Uses
+      At line 22 in file display.s
+Comment: Printa_1 used once
+Printa_2 0000010C
+
+Symbol: Printa_2
+   Definitions
+      At line 219 in file display.s
+   Uses
+      At line 23 in file display.s
+Comment: Printa_2 used once
+Printa_3 00000124
+
+Symbol: Printa_3
+   Definitions
+      At line 238 in file display.s
+   Uses
+      At line 24 in file display.s
+Comment: Printa_3 used once
+Printa_4 0000013C
+
+Symbol: Printa_4
+   Definitions
+      At line 256 in file display.s
+   Uses
+      At line 25 in file display.s
+Comment: Printa_4 used once
+Printa_5 00000154
+
+Symbol: Printa_5
+   Definitions
+      At line 274 in file display.s
+   Uses
+      At line 26 in file display.s
+Comment: Printa_5 used once
+Printa_6 0000016C
+
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: Printa_6
+   Definitions
+      At line 291 in file display.s
+   Uses
+      At line 27 in file display.s
+Comment: Printa_6 used once
+Printa_7 00000184
+
+Symbol: Printa_7
+   Definitions
+      At line 309 in file display.s
+   Uses
+      At line 28 in file display.s
+Comment: Printa_7 used once
+Printa_8 0000019C
+
+Symbol: Printa_8
+   Definitions
+      At line 326 in file display.s
+   Uses
+      At line 29 in file display.s
+Comment: Printa_8 used once
+Printa_9 000001B4
+
+Symbol: Printa_9
+   Definitions
+      At line 344 in file display.s
+   Uses
+      At line 30 in file display.s
+Comment: Printa_9 used once
+Printa_A 000001CC
+
+Symbol: Printa_A
+   Definitions
+      At line 362 in file display.s
+   Uses
+      At line 31 in file display.s
+Comment: Printa_A used once
+Printa_B 000001E4
+
+Symbol: Printa_B
+   Definitions
+      At line 380 in file display.s
+   Uses
+      At line 32 in file display.s
+Comment: Printa_B used once
+Printa_C 000001FC
+
+Symbol: Printa_C
+   Definitions
+      At line 398 in file display.s
+   Uses
+      At line 33 in file display.s
+Comment: Printa_C used once
+Printa_D 00000214
+
+Symbol: Printa_D
+   Definitions
+      At line 416 in file display.s
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Relocatable symbols
+
+   Uses
+      At line 34 in file display.s
+Comment: Printa_D used once
+Printa_E 0000022C
+
+Symbol: Printa_E
+   Definitions
+      At line 434 in file display.s
+   Uses
+      At line 35 in file display.s
+Comment: Printa_E used once
+Printa_F 00000244
+
+Symbol: Printa_F
+   Definitions
+      At line 452 in file display.s
+   Uses
+      At line 36 in file display.s
+Comment: Printa_F used once
+seg7_hex_tbl 00000000
+
+Symbol: seg7_hex_tbl
+   Definitions
+      At line 48 in file display.s
+   Uses
+      At line 83 in file display.s
+      At line 114 in file display.s
+
+25 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+PortA_Output 00000000
+
+Symbol: PortA_Output
+   Definitions
+      At line 40 in file display.s
+   Uses
+      At line 90 in file display.s
+      At line 121 in file display.s
+      At line 197 in file display.s
+      At line 214 in file display.s
+      At line 233 in file display.s
+      At line 251 in file display.s
+      At line 269 in file display.s
+      At line 286 in file display.s
+      At line 304 in file display.s
+      At line 321 in file display.s
+      At line 339 in file display.s
+      At line 357 in file display.s
+      At line 375 in file display.s
+      At line 393 in file display.s
+      At line 411 in file display.s
+      At line 429 in file display.s
+      At line 447 in file display.s
+      At line 465 in file display.s
+
+PortB_Output 00000000
+
+Symbol: PortB_Output
+   Definitions
+      At line 41 in file display.s
+   Uses
+      At line 139 in file display.s
+      At line 149 in file display.s
+      At line 159 in file display.s
+      At line 169 in file display.s
+
+PortN_Output 00000000
+
+Symbol: PortN_Output
+   Definitions
+      At line 42 in file display.s
+   Uses
+      None
+Comment: PortN_Output unused
+PortP_Output 00000000
+
+Symbol: PortP_Output
+   Definitions
+      At line 43 in file display.s
+   Uses
+      None
+Comment: PortP_Output unused
+PortQ_Output 00000000
+
+Symbol: PortQ_Output
+   Definitions
+      At line 44 in file display.s
+   Uses
+      At line 87 in file display.s
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+External symbols
+
+      At line 118 in file display.s
+      At line 193 in file display.s
+      At line 210 in file display.s
+      At line 228 in file display.s
+      At line 246 in file display.s
+      At line 264 in file display.s
+      At line 282 in file display.s
+      At line 299 in file display.s
+      At line 317 in file display.s
+      At line 334 in file display.s
+      At line 352 in file display.s
+      At line 370 in file display.s
+      At line 388 in file display.s
+      At line 406 in file display.s
+      At line 424 in file display.s
+      At line 442 in file display.s
+      At line 460 in file display.s
+
+SysTick_Wait1ms 00000000
+
+Symbol: SysTick_Wait1ms
+   Definitions
+      At line 38 in file display.s
+   Uses
+      At line 94 in file display.s
+      At line 97 in file display.s
+      At line 125 in file display.s
+      At line 128 in file display.s
+
+6 symbols
+365 symbols in table

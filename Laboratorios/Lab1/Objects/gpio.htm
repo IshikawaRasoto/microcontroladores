@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\gpio.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\gpio.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Apr 04 10:00:57 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Tue Sep 23 04:56:02 2025
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -12,14 +12,55 @@ Call chain for Maximum Stack Depth:</H3>
 <H3>
 Functions with no stack information
 </H3><UL>
- <LI><a href="#[6b]">Reset_Handler</a>
- <LI><a href="#[6f]">GPIO_Init</a>
- <LI><a href="#[70]">PortN_Output</a>
- <LI><a href="#[71]">PortJ_Input</a>
- <LI><a href="#[6c]">Start</a>
- <LI><a href="#[6d]">PLL_Init</a>
- <LI><a href="#[6e]">SysTick_Init</a>
- <LI><a href="#[72]">SysTick_Wait1ms</a>
+ <LI><a href="#[0]">Reset_Handler</a>
+ <LI><a href="#[76]">GPIO_Init</a>
+ <LI><a href="#[99]">PortN_Output</a>
+ <LI><a href="#[7c]">Acende_LED_N0</a>
+ <LI><a href="#[7b]">Apaga_LED_N0</a>
+ <LI><a href="#[7a]">Acende_LED_N1</a>
+ <LI><a href="#[7d]">Apaga_LED_N1</a>
+ <LI><a href="#[7f]">PortA_Output</a>
+ <LI><a href="#[85]">PortB_Output</a>
+ <LI><a href="#[98]">PortP_Output</a>
+ <LI><a href="#[7e]">PortQ_Output</a>
+ <LI><a href="#[6c]">Configura_Interrupts</a>
+ <LI><a href="#[6d]">Desabilita_GPIOIM</a>
+ <LI><a href="#[6e]">Configura_GPIOIS</a>
+ <LI><a href="#[6f]">Configura_GPIOIBE</a>
+ <LI><a href="#[70]">Configura_GPIOIEV</a>
+ <LI><a href="#[71]">Configura_GPIOICR</a>
+ <LI><a href="#[72]">Habilita_GPIOIM</a>
+ <LI><a href="#[73]">Ativa_NVIC</a>
+ <LI><a href="#[3d]">GPIOPortJ_Handler</a>
+ <LI><a href="#[6b]">Start</a>
+ <LI><a href="#[74]">PLL_Init</a>
+ <LI><a href="#[75]">SysTick_Init</a>
+ <LI><a href="#[81]">SysTick_Wait1ms</a>
+ <LI><a href="#[77]">Escreve_Display_Decimo</a>
+ <LI><a href="#[78]">Escreve_Display_Unitario</a>
+ <LI><a href="#[80]">Display1_Liga</a>
+ <LI><a href="#[82]">Display1_Desliga</a>
+ <LI><a href="#[83]">Display2_Liga</a>
+ <LI><a href="#[84]">Display2_Desliga</a>
+ <LI><a href="#[86]">Printa_0</a>
+ <LI><a href="#[87]">Printa_1</a>
+ <LI><a href="#[88]">Printa_2</a>
+ <LI><a href="#[89]">Printa_3</a>
+ <LI><a href="#[8a]">Printa_4</a>
+ <LI><a href="#[8b]">Printa_5</a>
+ <LI><a href="#[8c]">Printa_6</a>
+ <LI><a href="#[8d]">Printa_7</a>
+ <LI><a href="#[8e]">Printa_8</a>
+ <LI><a href="#[8f]">Printa_9</a>
+ <LI><a href="#[90]">Printa_A</a>
+ <LI><a href="#[91]">Printa_B</a>
+ <LI><a href="#[92]">Printa_C</a>
+ <LI><a href="#[93]">Printa_D</a>
+ <LI><a href="#[94]">Printa_E</a>
+ <LI><a href="#[95]">Printa_F</a>
+ <LI><a href="#[79]">Escreve_LEDs</a>
+ <LI><a href="#[96]">Acende_Leds</a>
+ <LI><a href="#[97]">Apaga_Leds</a>
 </UL>
 </UL>
 <P>
@@ -67,7 +108,7 @@ Function Pointers
  <LI><a href="#[28]">GPIOPortF_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[29]">GPIOPortG_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2a]">GPIOPortH_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[3d]">GPIOPortJ_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
+ <LI><a href="#[3d]">GPIOPortJ_Handler</a> from gpio.o(.text) referenced from startup.o(RESET)
  <LI><a href="#[3e]">GPIOPortK_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[3f]">GPIOPortL_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[50]">GPIOPortM_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
@@ -109,7 +150,7 @@ Function Pointers
  <LI><a href="#[35]">PWM0Generator3_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[8]">PendSV_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[17]">Quadrature0_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[6b]">Reset_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
+ <LI><a href="#[0]">Reset_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[11]">SSI0_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2c]">SSI1_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[40]">SSI2_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
@@ -152,10 +193,11 @@ Function Pointers
 <H3>
 Global Symbols
 </H3>
-<P><STRONG><a name="[6b]"></a>Reset_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(RESET))
-<BR><BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+<P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
-
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
 <P><STRONG><a name="[1]"></a>NMI_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR><BR>[Calls]<UL><LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NMI_Handler
 </UL>
@@ -296,9 +338,6 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
 <P><STRONG><a name="[2a]"></a>GPIOPortH_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
-<P><STRONG><a name="[3d]"></a>GPIOPortJ_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
 <P><STRONG><a name="[3e]"></a>GPIOPortK_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
@@ -514,31 +553,302 @@ Global Symbols
 <P><STRONG><a name="[36]"></a>uDMA_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[6f]"></a>GPIO_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+<P><STRONG><a name="[76]"></a>GPIO_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
 
-<P><STRONG><a name="[70]"></a>PortN_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text), UNUSED)
+<P><STRONG><a name="[99]"></a>PortN_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text), UNUSED)
 
-<P><STRONG><a name="[71]"></a>PortJ_Input</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text), UNUSED)
-
-<P><STRONG><a name="[6c]"></a>Start</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Init
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
-<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+<P><STRONG><a name="[7c]"></a>Acende_LED_N0</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
 
-<P><STRONG><a name="[6d]"></a>PLL_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+<P><STRONG><a name="[7b]"></a>Apaga_LED_N0</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
 
-<P><STRONG><a name="[6e]"></a>SysTick_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+<P><STRONG><a name="[7a]"></a>Acende_LED_N1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
 
-<P><STRONG><a name="[72]"></a>SysTick_Wait1ms</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text), UNUSED)
+<P><STRONG><a name="[7d]"></a>Apaga_LED_N1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[7f]"></a>PortA_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_F
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_E
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_D
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_C
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_B
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_A
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_9
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_8
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_7
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_6
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_5
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_4
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_3
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_2
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_1
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_0
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_LEDs
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Unitario
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Decimo
+</UL>
+
+<P><STRONG><a name="[85]"></a>PortB_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display2_Desliga
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display2_Liga
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display1_Desliga
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display1_Liga
+</UL>
+
+<P><STRONG><a name="[98]"></a>PortP_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Apaga_Leds
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Acende_Leds
+</UL>
+
+<P><STRONG><a name="[7e]"></a>PortQ_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_F
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_E
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_D
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_C
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_B
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_A
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_9
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_8
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_7
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_6
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_5
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_4
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_3
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_2
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_1
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Printa_0
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_LEDs
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Unitario
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Decimo
+</UL>
+
+<P><STRONG><a name="[6c]"></a>Configura_Interrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ativa_NVIC
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Habilita_GPIOIM
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_GPIOICR
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_GPIOIEV
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_GPIOIBE
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_GPIOIS
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Desabilita_GPIOIM
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[6d]"></a>Desabilita_GPIOIM</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_Interrupts
+</UL>
+
+<P><STRONG><a name="[6e]"></a>Configura_GPIOIS</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_Interrupts
+</UL>
+
+<P><STRONG><a name="[6f]"></a>Configura_GPIOIBE</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_Interrupts
+</UL>
+
+<P><STRONG><a name="[70]"></a>Configura_GPIOIEV</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_Interrupts
+</UL>
+
+<P><STRONG><a name="[71]"></a>Configura_GPIOICR</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_Interrupts
+</UL>
+
+<P><STRONG><a name="[72]"></a>Habilita_GPIOIM</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_Interrupts
+</UL>
+
+<P><STRONG><a name="[73]"></a>Ativa_NVIC</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_Interrupts
+</UL>
+
+<P><STRONG><a name="[3d]"></a>GPIOPortJ_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
+<P><STRONG><a name="[6b]"></a>Start</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Init
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_LEDs
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Unitario
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Decimo
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Configura_Interrupts
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Apaga_LED_N1
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Acende_LED_N1
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Apaga_LED_N0
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Acende_LED_N0
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[74]"></a>PLL_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[75]"></a>SysTick_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[81]"></a>SysTick_Wait1ms</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_LEDs
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Unitario
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Decimo
+</UL>
+
+<P><STRONG><a name="[77]"></a>Escreve_Display_Decimo</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display1_Desliga
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display1_Liga
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[78]"></a>Escreve_Display_Unitario</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display2_Desliga
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display2_Liga
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[80]"></a>Display1_Liga</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortB_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Decimo
+</UL>
+
+<P><STRONG><a name="[82]"></a>Display1_Desliga</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortB_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Decimo
+</UL>
+
+<P><STRONG><a name="[83]"></a>Display2_Liga</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortB_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Unitario
+</UL>
+
+<P><STRONG><a name="[84]"></a>Display2_Desliga</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortB_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_Display_Unitario
+</UL>
+
+<P><STRONG><a name="[86]"></a>Printa_0</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[87]"></a>Printa_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[88]"></a>Printa_2</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[89]"></a>Printa_3</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[8a]"></a>Printa_4</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[8b]"></a>Printa_5</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[8c]"></a>Printa_6</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[8d]"></a>Printa_7</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[8e]"></a>Printa_8</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[8f]"></a>Printa_9</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[90]"></a>Printa_A</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[91]"></a>Printa_B</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[92]"></a>Printa_C</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[93]"></a>Printa_D</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[94]"></a>Printa_E</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[95]"></a>Printa_F</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, display.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+
+<P><STRONG><a name="[79]"></a>Escreve_LEDs</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, leds.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Apaga_Leds
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Acende_Leds
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[96]"></a>Acende_Leds</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, leds.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortP_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_LEDs
+</UL>
+
+<P><STRONG><a name="[97]"></a>Apaga_Leds</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, leds.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortP_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Escreve_LEDs
+</UL>
 <P>
 <H3>
 Local Symbols

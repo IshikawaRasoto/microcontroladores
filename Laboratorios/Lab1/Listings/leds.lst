@@ -1,0 +1,189 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; leds.s
+    2 00000000         ; Desenvolvido para a placa EK-TM4C1294XL
+    3 00000000         ; Codigo que controla os leds da placa de apoio:
+    4 00000000         
+    5 00000000         ; ------------------------------------------------------
+                       -------------------------
+    6 00000000                 THUMB                        ; Instru��es do
+                                                             tipo Thumb-2
+    7 00000000         ; ------------------------------------------------------
+                       -------------------------
+    8 00000000         
+    9 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+   10 00000000         
+   11 00000000                 export           Escreve_LEDs
+   12 00000000                 export           Acende_Leds
+   13 00000000                 export           Apaga_Leds
+   14 00000000         
+   15 00000000                 import           SysTick_Wait1ms
+   16 00000000         
+   17 00000000                 import           PortA_Output
+   18 00000000                 import           PortB_Output
+   19 00000000                 import           PortN_Output ; Permite chamar P
+                                                            ortN_Output de outr
+                                                            o arquivo
+   20 00000000                 import           PortP_Output
+   21 00000000                 import           PortQ_Output
+   22 00000000         
+   23 00000000         ; Inputs para as proximas funcoes
+   24 00000000         ; R11 - Valor dos leds
+   25 00000000         
+   26 00000000         ; Rotinas para controle dos leds
+   27 00000000         
+   28 00000000         Escreve_LEDs
+   29 00000000 B507            push             {r0, r1, r2, lr}
+   30 00000002         
+   31 00000002         ; chama as funcoes para escrever os valores nos LEDs
+   32 00000002 F00B 020F       and              r2, r11, #2_00001111 
+                                                            ; isola os bits 0-3
+                                                            
+   33 00000006 F7FF FFFE       bl               PortQ_Output
+   34 0000000A F00B 02F0       and              r2, r11, #2_11110000 ; isola os
+                                                             bits 4 - 7
+   35 0000000E F7FF FFFE       bl               PortA_Output
+   36 00000012         
+   37 00000012 F7FF FFFE       bl               Acende_Leds
+   38 00000016 F04F 0001       mov              r0, #1
+   39 0000001A F7FF FFFE       bl               SysTick_Wait1ms
+   40 0000001E F7FF FFFE       bl               Apaga_Leds
+   41 00000022 F04F 0001       mov              r0, #1
+   42 00000026 F7FF FFFE       bl               SysTick_Wait1ms
+   43 0000002A         
+   44 0000002A E8BD 4007       pop              {r0, r1, r2, lr}
+   45 0000002E 4770            bx               lr
+   46 00000030         
+   47 00000030         Acende_Leds
+   48 00000030 B507            push             {r0, r1, r2, lr}
+   49 00000032         
+   50 00000032 F04F 0220       mov              r2, #2_100000
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   51 00000036 F7FF FFFE       bl               PortP_Output
+   52 0000003A         
+   53 0000003A E8BD 4007       pop              {r0, r1, r2, lr}
+   54 0000003E 4770            bx               lr
+   55 00000040         
+   56 00000040         Apaga_Leds
+   57 00000040 B507            push             {r0, r1, r2, lr}
+   58 00000042         
+   59 00000042 F04F 0200       mov              r2, #0x0
+   60 00000046 F7FF FFFE       bl               PortP_Output
+   61 0000004A         
+   62 0000004A E8BD 4007       pop              {r0, r1, r2, lr}
+   63 0000004E 4770            bx               lr
+                       
+Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M4.fp.sp 
+--depend=.\objects\leds.d -o.\objects\leds.o -IC:\Users\rafae\AppData\Local\Arm
+\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129 --predefine="__EVAL SETA 1" -
+-predefine="__UVISION_VERSION SETA 543" --predefine="TM4C1294NCPDT SETA 1" --li
+st=.\listings\leds.lst leds.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 9 in file leds.s
+   Uses
+      None
+Comment: .text unused
+Acende_Leds 00000030
+
+Symbol: Acende_Leds
+   Definitions
+      At line 47 in file leds.s
+   Uses
+      At line 12 in file leds.s
+      At line 37 in file leds.s
+
+Apaga_Leds 00000040
+
+Symbol: Apaga_Leds
+   Definitions
+      At line 56 in file leds.s
+   Uses
+      At line 13 in file leds.s
+      At line 40 in file leds.s
+
+Escreve_LEDs 00000000
+
+Symbol: Escreve_LEDs
+   Definitions
+      At line 28 in file leds.s
+   Uses
+      At line 11 in file leds.s
+Comment: Escreve_LEDs used once
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+PortA_Output 00000000
+
+Symbol: PortA_Output
+   Definitions
+      At line 17 in file leds.s
+   Uses
+      At line 35 in file leds.s
+Comment: PortA_Output used once
+PortB_Output 00000000
+
+Symbol: PortB_Output
+   Definitions
+      At line 18 in file leds.s
+   Uses
+      None
+Comment: PortB_Output unused
+PortN_Output 00000000
+
+Symbol: PortN_Output
+   Definitions
+      At line 19 in file leds.s
+   Uses
+      None
+Comment: PortN_Output unused
+PortP_Output 00000000
+
+Symbol: PortP_Output
+   Definitions
+      At line 20 in file leds.s
+   Uses
+      At line 51 in file leds.s
+      At line 60 in file leds.s
+
+PortQ_Output 00000000
+
+Symbol: PortQ_Output
+   Definitions
+      At line 21 in file leds.s
+   Uses
+      At line 33 in file leds.s
+Comment: PortQ_Output used once
+SysTick_Wait1ms 00000000
+
+Symbol: SysTick_Wait1ms
+   Definitions
+      At line 15 in file leds.s
+   Uses
+      At line 39 in file leds.s
+      At line 42 in file leds.s
+
+6 symbols
+344 symbols in table
