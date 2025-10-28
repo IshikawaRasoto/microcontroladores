@@ -4,6 +4,26 @@
 
 #include <stdint.h>
 
+const int sequenciaPassoCompletoBit[4] = {
+	~0x08,
+	~0x04,
+	~0x02,
+	~0x01
+};
+
+static const int sequenciaMeioPassoBit[8] = {
+	~0x08,
+	~0x0C,
+	~0x04,
+	~0x06,
+	~0x02,
+	~0x03,
+	~0x01,
+	~0x09
+};
+
+
+
 static const int sequenciaPassoCompleto[4][4] = {
     {1, 0, 0, 0},
     {0, 1, 0, 0},
@@ -33,11 +53,11 @@ void ativarMotor(int graus, int velocidade, int sentido){
 	for (int i = 0; i < passosDesejados; i++){
 		for (int passo = 0; passo < n_sequencias; passo++){ 
 			int indexEstado = sentido == 1 ? (n_sequencias - passo) % n_sequencias : passo;
-			const int* bobina = velocidade == 1 ? sequenciaPassoCompleto[indexEstado] : sequenciaMeioPasso[indexEstado];
+			const int bobina = velocidade == 1 ? sequenciaPassoCompletoBit[indexEstado] : sequenciaMeioPassoBit[indexEstado];
 		
-			uint8_t saida = (bobina[0] << 0) | (bobina[1] << 1) | (bobina[2] << 2) | (bobina[3] << 3);
+			uint8_t saida = bobina;
 			PortH_Output(saida);
-			SysTick_Wait1ms(5);
+			SysTick_Wait1ms(2);
 		}		
 	}  
 }
