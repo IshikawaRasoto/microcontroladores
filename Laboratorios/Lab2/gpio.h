@@ -22,6 +22,7 @@ typedef enum {
 } GPIO_Port;
 
 void GPIO_Init(void);
+void interrupts_init(void);
 
 void PortA_Output(uint32_t value);
 void PortB_Output(uint32_t value);

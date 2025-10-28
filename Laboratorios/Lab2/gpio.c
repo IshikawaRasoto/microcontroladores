@@ -90,6 +90,19 @@ void GPIO_Init(void) {
     GPIO_PORTL_PUR_R = 0x0F; 
 }
 
+#define NVIC_EN1_PORTJ_BIT     (1u << 19)
+
+void interrupts_init(void){
+	GPIO_PORTJ_AHB_IM_R = 0x0;
+	GPIO_PORTJ_AHB_IS_R = 0x0; 	// Borda
+	GPIO_PORTJ_AHB_IBE_R = 0x0; // Borda unica
+	GPIO_PORTJ_AHB_IEV_R = 0x0; // Bordas de descida
+	GPIO_PORTJ_AHB_ICR_R = 0x3; // Garante que a interrupcao sera atendida
+	GPIO_PORTJ_AHB_IM_R = 0x3;
+	NVIC_PRI12_R = (NVIC_PRI12_R & 0x00FFFFFF) | (5 << 29);
+	NVIC_EN1_R |= 1u << 19;
+}
+
 // Envia valor para a porta A (PA0-7)
 void PortA_Output(uint32_t value) {
     GPIO_PORTA_AHB_DATA_R = value;
