@@ -1,0 +1,7 @@
+--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --diag_suppress=A1950W
+-IC:\Users\rafae\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129
+--pd "__UVISION_VERSION SETA 543"
+--pd "TM4C1294NCPDT SETA 1"
+--list .\listings\startup.lst
+--xref -o .\objects\startup.o
+--depend .\objects\startup.d "startup.s"
