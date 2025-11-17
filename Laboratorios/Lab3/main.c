@@ -137,8 +137,10 @@ void passo5(){
 
     char comando = 0;
     while(comando != 's'){
+        comando = lerUART();
         uint32_t leitura = leituraADC();
-
+        printNumero(leitura);
+        print("\n");
     }
 
     estado = 2;
@@ -173,6 +175,7 @@ int main(void)
 				break;
 			default:
 			    estado = 2;
+                break;
 		}
 	}
 }
