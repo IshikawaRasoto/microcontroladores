@@ -2,13 +2,14 @@ Dependencies for Project 'exemplo', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 6240000::V6.24::ARMCLANG
 F (.\startup.s)(0x68E50A8D)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --diag_suppress=A1950W-IC:\Users\rafae\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129--pd "__UVISION_VERSION SETA 543"--pd "TM4C1294NCPDT SETA 1"--list .\listings\startup.lst--xref -o .\objects\startup.o--depend .\objects\startup.d)
 F (.\utils.s)(0x68FD3FA0)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --diag_suppress=A1950W-IC:\Users\rafae\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129--pd "__UVISION_VERSION SETA 543"--pd "TM4C1294NCPDT SETA 1"--list .\listings\utils.lst--xref -o .\objects\utils.o--depend .\objects\utils.d)
-F (.\main.c)(0x691A5D84)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-IC:/Users/rafae/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="543" -DTM4C1294NCPDT-o ./objects/main.o -MMD)
+F (.\main.c)(0x691BF378)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-IC:/Users/rafae/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="543" -DTM4C1294NCPDT-o ./objects/main.o -MMD)
 I (define.h)(0x690A0B50)
 I (gpio.h)(0x690020CD)
 I (systick.h)(0x68FD34BA)
 I (tm4c1294ncpdt.h)(0x68E50A8D)
 I (uart.h)(0x69133C16)
 I (adc.h)(0x69134153)
+I (timer.h)(0x691BCED9)
 F (.\tm4c1294ncpdt.h)(0x68E50A8D)()
 F (.\define.h)(0x690A0B50)()
 F (.\teclado.h)(0x68FD35E2)()
@@ -35,13 +36,18 @@ F (.\led.h)(0x69001A02)()
 F (.\led.c)(0x69002A26)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-IC:/Users/rafae/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="543" -DTM4C1294NCPDT-o ./objects/led.o -MMD)
 I (led.h)(0x69001A02)
 I (gpio.h)(0x690020CD)
-F (.\uart.c)(0x691A60A9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-IC:/Users/rafae/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="543" -DTM4C1294NCPDT-o ./objects/uart.o -MMD)
+F (.\uart.c)(0x691BB8C6)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-IC:/Users/rafae/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="543" -DTM4C1294NCPDT-o ./objects/uart.o -MMD)
 I (uart.h)(0x69133C16)
 I (tm4c1294ncpdt.h)(0x68E50A8D)
 I (define.h)(0x690A0B50)
+I (systick.h)(0x68FD34BA)
 F (.\uart.h)(0x69133C16)()
 F (.\adc.h)(0x69134153)()
 F (.\adc.c)(0x69134728)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-IC:/Users/rafae/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="543" -DTM4C1294NCPDT-o ./objects/adc.o -MMD)
 I (adc.h)(0x69134153)
 I (tm4c1294ncpdt.h)(0x68E50A8D)
 I (gpio.h)(0x690020CD)
+F (.\timer.h)(0x691BCED9)()
+F (.\timer.c)(0x691BE945)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-IC:/Users/rafae/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="543" -DTM4C1294NCPDT-o ./objects/timer.o -MMD)
+I (timer.h)(0x691BCED9)
+I (tm4c1294ncpdt.h)(0x68E50A8D)

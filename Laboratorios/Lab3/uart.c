@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include "tm4c1294ncpdt.h"
 #include "define.h"
+#include "systick.h"
 
 #define WLEN_8 0x60
 #define FIFO_EN 0x10
@@ -66,7 +67,9 @@ void println(const char* str){
         while(!escreverUART(*str));
         str++;
     }
-		escreverUART('\n');
+		while(!escreverUART('\n'));
+		//while(!escreverUART('\r'));
+		SysTick_Wait1ms(10);
 }
 
 void printNumero(uint16_t numero){

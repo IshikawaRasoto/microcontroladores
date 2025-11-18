@@ -13,4 +13,5 @@ SET CPU_CLOCK=0x00B71B00
 "C:\Users\rafae\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @".\objects\led.__i"
 "C:\Users\rafae\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @".\objects\uart.__i"
 "C:\Users\rafae\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @".\objects\adc.__i"
+"C:\Users\rafae\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin\ArmClang.exe" @".\objects\timer.__i"
 "C:\Users\rafae\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin\ArmLink" --Via ".\Objects\exemplo.lnp"
